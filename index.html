@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SwiftXpress Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('banner.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 32rem;
+            /* Increased container width */
+            backdrop-filter: blur(2px);
+        }
+
+        .text-gray-600 {
+            color: #4b5563 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="flex justify-center mb-6">
+            <!-- Increased logo size from h-48 to h-56 -->
+            <img src="logo.png" alt="SwiftXpress Logo" class="h-56 w-auto" />
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+            <div class="relative">
+                <label for="username" class="block text-gray-600 mb-1 font-medium">Username</label>
+                <i class="ph ph-user absolute top-[36px] left-3 text-gray-500 text-xl"></i>
+                <input type="text" id="username" placeholder="Username"
+                    class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" />
+                <span class="absolute right-3 top-12 text-xs text-gray-500">Default: admin</span>
+            </div>
+            <div class="relative">
+                <label for="password" class="block text-gray-600 mb-1 font-medium">Password</label>
+                <i class="ph ph-key absolute top-[36px] left-3 text-gray-500 text-xl"></i>
+                <input type="password" id="password" placeholder="Password"
+                    class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" />
+                <span class="absolute right-3 top-12 text-xs text-gray-500">Default: admin</span>
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-medium">Login</button>
+        </form>
+
+        <h2 class="text-md font-semibold text-center text-gray-700 mt-6">Login to SwiftXpress</h2>
+
+        <p id="error" class="text-red-600 text-sm mt-4 text-center hidden font-medium">Please enter valid credentials.
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!username || !password) {
+                document.getElementById('error').textContent = 'Username and Password are required.';
+                document.getElementById('error').classList.remove('hidden');
+                return;
+            }
+
+            if (username === 'admin' && password === 'admin') {
+                window.location.href = 'portal.html';
+            } else {
+                document.getElementById('error').textContent = 'Invalid credentials. Please try again.';
+                document.getElementById('error').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
